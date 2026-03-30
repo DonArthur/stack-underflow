@@ -6,8 +6,8 @@ interface AuthState {
   logout: () => void;
 }
 
-export const useAuthStore = create<AuthState>(() => ({
+export const useAuthStore = create<AuthState>((set) => ({
   user: null,
-  login: () => {},
-  logout: () => {},
+  login: (username) => set({ user: username }),
+  logout: () => set({ user: null }),
 }));
