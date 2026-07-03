@@ -3,6 +3,7 @@ package com.geraldy.stackunderflow.service;
 import com.geraldy.stackunderflow.dto.QuestionRequest;
 import com.geraldy.stackunderflow.dto.QuestionResponse;
 import com.geraldy.stackunderflow.entity.Question;
+import com.geraldy.stackunderflow.exception.QuestionNotFoundException;
 import com.geraldy.stackunderflow.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,8 @@ public class QuestionService {
     }
 
     public QuestionResponse getQuestionById(Long id) {
-        Question question = questionRepository.findById(id).orElseThrow();
+        Question question = questionRepository.findById(id)
+                .orElseThrow(() -> new QuestionNotFoundException(id));
 
         return toResponse(question);
     }
