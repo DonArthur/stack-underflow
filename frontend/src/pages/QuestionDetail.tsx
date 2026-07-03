@@ -3,7 +3,7 @@ import MainLayout from "../components/layout/MainLayout";
 import { useQuestionStore } from "../store/questionStore";
 import { useAnswerStore } from "../store/answerStore";
 import AnswerCard from "../components/answer/AnswerCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthStore } from "../store/authStore";
 
 export default function QuestionDetail() {
@@ -11,9 +11,7 @@ export default function QuestionDetail() {
   const navigate = useNavigate()
   const [content, setContent] = useState('')
 
-  const question = useQuestionStore((state) =>
-    state.questions.find((q) => q.id === id)
-  )
+  const { questionDetail, getQuestionById } = useQuestionStore()
   const user = useAuthStore((state) => state.user)
   const allAnswers = useAnswerStore((state) => state.answers)
   const addAnswer = useAnswerStore((state) => state.addAnswer)
@@ -33,7 +31,13 @@ export default function QuestionDetail() {
   }
   const answers = allAnswers.filter((ans) => ans.questionId === id)
 
-  if (!question) {
+  useEffect(() => {
+    if (id) {
+      getQuestionById(Number(id))
+    }
+  }, [id, getQuestionById])
+
+  if (!questionDetail) {
     return (
       <MainLayout>
         <p>Question not found</p>
@@ -48,24 +52,24 @@ export default function QuestionDetail() {
       </button>
 
       <div className="bg-white p-6 rounded shadow">
-        <h1 className="text-2xl font-bold text-blue-600">{question.title}</h1>
+        <h1 className="text-2xl font-bold text-blue-600">{questionDetail.title}</h1>
 
         <p className="text-gray-700 mt-4">
-          {question.description}
+          {questionDetail.description}
         </p>
 
         <div className="flex justify-between text-sm text-gray-500 mt-6">
           <span>
             Status: 
             <span className={`px-2 py-1 ml-2 rounded text-white text-xs ${
-              question.status === 'open' ? 'bg-green-500' : question.status === 'answered'
+              questionDetail.status === 'open' ? 'bg-green-500' : questionDetail.status === 'answered'
               ? 'bg-blue-500' : 'bg-gray-500'
             }`}>
-              {question.status}
+              {questionDetail.status}
             </span>
           </span>
           <span>
-            {question.author} &#183; {question.createdAt}
+            {questionDetail.author} &#183; {questionDetail.createdAt}
           </span>
         </div>
 
@@ -82,7 +86,7 @@ export default function QuestionDetail() {
         </div>
 
         {
-          question.status !== 'closed' && (
+          questionDetail.status !== 'closed' && (
             <div className="mt-6">
               <textarea
                 value={content}

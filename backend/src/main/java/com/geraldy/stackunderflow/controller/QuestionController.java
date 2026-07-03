@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/questions")
 public class QuestionController {
     private final QuestionService questionService;
@@ -30,5 +31,18 @@ public class QuestionController {
     @PostMapping
     public QuestionResponse createQuestion(@Valid @RequestBody QuestionRequest request) {
         return questionService.createQuestion(request);
+    }
+
+    @PutMapping("/{id}")
+    public QuestionResponse updateQuestion(
+            @PathVariable Long id,
+            @RequestBody QuestionRequest request
+    ) {
+        return questionService.updateQuestion(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteQuestion(@PathVariable Long id) {
+        questionService.deleteQuestion(id);
     }
 }

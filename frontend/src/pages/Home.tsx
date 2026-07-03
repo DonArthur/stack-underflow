@@ -2,10 +2,15 @@ import { useNavigate } from "react-router-dom";
 import MainLayout from "../components/layout/MainLayout";
 import QuestionCard from "../components/question/QuestionCard";
 import { useQuestionStore } from "../store/questionStore";
+import { useEffect } from "react";
 
 export default function Home() {
-  const questions = useQuestionStore((state) => state.questions)
+  const { questions, loadQuestions } = useQuestionStore()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    loadQuestions()
+  }, [loadQuestions])
 
   return (
     <MainLayout>

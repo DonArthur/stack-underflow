@@ -39,6 +39,31 @@ public class QuestionService {
         return toResponse(savedQuestion);
     }
 
+//    PUT
+    public QuestionResponse updateQuestion(
+            Long id,
+            QuestionRequest request
+    ) {
+        Question question = questionRepository.findById(id)
+                .orElseThrow(() -> new QuestionNotFoundException(id));
+
+        question.setTitle(request.title());
+        question.setDescription(request.description());
+
+        Question updated = questionRepository.save(question);
+
+        return toResponse(updated);
+    }
+
+//    DELETE
+    public void deleteQuestion(Long id) {
+        if (!questionRepository.existsById(id)) {
+            throw new QuestionNotFoundException(id);
+        }
+
+        questionRepository.deleteById(id);
+    }
+
     private QuestionResponse toResponse(Question question) {
         return new QuestionResponse(
                 question.getId(),
