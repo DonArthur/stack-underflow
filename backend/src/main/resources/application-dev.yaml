@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/stack_underflow}
+    url: ${DB_URL:jdbc:postgresql://host.docker.internal:5432/stack_underflow}
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD}
 

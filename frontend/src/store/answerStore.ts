@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import type { Answer } from "../types/answer";
-import { mockAnswers } from "../data/mockAnswers";
 
 interface AnswerState {
   answers: Answer[];
@@ -9,7 +8,7 @@ interface AnswerState {
 }
 
 export const useAnswerStore = create<AnswerState>((set) => ({
-  answers: mockAnswers,
+  answers: [],
 
   addAnswer: (answer) =>
     set((state) => ({

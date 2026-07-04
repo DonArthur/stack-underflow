@@ -51,12 +51,14 @@ export default function AskQuestion() {
     if (!title.trim() || !description.trim()) return;
 
     addQuestion({
-      id: Date.now().toString(),
+      id: 0,
       title,
       description,
       status: "open",
       createdAt: new Date().toISOString().split("T")[0],
-      author: "You",
+      updatedAt: new Date().toISOString().split("T")[0],
+      authorId: 0,
+      author: ""
     });
 
     navigate("/");
