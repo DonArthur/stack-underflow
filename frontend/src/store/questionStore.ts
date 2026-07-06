@@ -28,7 +28,7 @@ export const useQuestionStore = create<QuestionState>((set) => ({
   },
   getQuestionById: async (id) => {
     const questionDetail = await getQuestionById(id)
-
+    console.log('questionDetail', questionDetail)
     if (questionDetail) {
       set({ questionDetail })
     } else {
