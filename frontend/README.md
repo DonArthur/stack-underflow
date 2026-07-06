@@ -10,7 +10,9 @@ It is built using:
 - Zustand (state management)
 - React Router
 
-No backend or API integration in included. All data is managed in-memory.
+No backend or API integration is included in this deployed version. All data is managed in-memory.
+
+> A fully working Spring Boot + PostgreSQL backend exists in [`/backend`](../backend) and can be run independently — see the [root README](../README.md) for setup instructions. It isn't connected here to keep the live demo free of hosting costs and card-verification requirements.
 
 ## Setup Instructions
 
@@ -55,14 +57,12 @@ src/
 - No API calls are made
 
 ## Known Limitations
-- No backend integration
-- No data persistence
 - No validation or error handling (yet)
 - No pagination or search
 
 ## Future Improvements
-- Backend integration (Spring Boot / Node.js)
+- Connect to the existing Spring Boot backend (see `/backend`)
 - Persistent storage
-- Authentication system
+- Real authentication system
 - Search & filtering
 - Pagination

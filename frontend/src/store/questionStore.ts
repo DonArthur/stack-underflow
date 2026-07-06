@@ -2,6 +2,7 @@ import { create } from "zustand";
 import type { Question } from "../types/question";
 import type { Comment } from "../types/comment";
 import { getQuestionById, getQuestions } from "../services/questionService";
+import { mockQuestions } from "../data/mockData";
 
 interface QuestionState {
   questions: Question[];
@@ -13,14 +14,17 @@ interface QuestionState {
 }
 
 export const useQuestionStore = create<QuestionState>((set) => ({
-  questions: [],
+  // questions: [],
+  questions: mockQuestions,
   questionDetail: null,
   loadQuestions: async () => {
     const questions = await getQuestions()
 
-    set({
-      questions
-    })
+    if (questions.length > 0) {
+      set({
+        questions
+      })
+    }
   },
   getQuestionById: async (id) => {
     const questionDetail = await getQuestionById(id)
