@@ -27,15 +27,15 @@ export const useQuestionStore = create<QuestionState>((set) => ({
     }
   },
   getQuestionById: async (id) => {
-    const questionDetail = await getQuestionById(id)
-    console.log('questionDetail', questionDetail)
-    if (questionDetail) {
-      set({ questionDetail })
-    } else {
-      const filteredMock = mockQuestions.filter(q => q.id === id)
-
-      if (filteredMock.length > 0) set({ questionDetail:  filteredMock[0]})
+    try {
+      const questionDetail = await getQuestionById(id)
+      if (questionDetail) set({ questionDetail })      
+    } catch (error) {
+      console.error('API call failed, return to mock data: ', error)
     }
+    const filteredMock = mockQuestions.filter(q => q.id === id)
+
+    if (filteredMock.length > 0) set({ questionDetail:  filteredMock[0]})
   },
   addQuestion: (q) => 
     set((state) => ({
