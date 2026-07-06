@@ -29,7 +29,13 @@ export const useQuestionStore = create<QuestionState>((set) => ({
   getQuestionById: async (id) => {
     const questionDetail = await getQuestionById(id)
 
-    set({ questionDetail })
+    if (questionDetail) {
+      set({ questionDetail })
+    } else {
+      const filteredMock = mockQuestions.filter(q => q.id === id)
+
+      if (filteredMock.length > 0) set({ questionDetail:  filteredMock[0]})
+    }
   },
   addQuestion: (q) => 
     set((state) => ({
