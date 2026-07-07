@@ -29,7 +29,7 @@ export default function Login() {
         <h1 className="text-xl font-bold mb-4">Login</h1>
 
         <input
-          placeholder="Username"
+          placeholder="Input any username for now"
           className="w-full border p-2 mb-2"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -37,7 +37,7 @@ export default function Login() {
 
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Input any password for now"
           className="w-full border p-2 mb-4"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
