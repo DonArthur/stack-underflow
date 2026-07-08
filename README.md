@@ -2,7 +2,7 @@
 
 A simple React.js Q&A web application inspired by Stack Overflow, with login and user features such as browsing, posting, and updating questions, plus participating in discussions through comments.
 
-🔗 **Live Demo:** [add your deployed frontend link here]
+🔗 **Live Demo:** [`Deployed app with dummy data`](https://stack-underflow-chi.vercel.app/login)
 📂 **Backend Source:** [`/backend`](./backend)
 
 ---
